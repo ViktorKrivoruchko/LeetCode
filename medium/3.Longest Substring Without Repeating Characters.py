@@ -16,3 +16,15 @@ class Solution1:
         if len(result) < len(check):
             result = check
         return len(result)
+
+# эффективное решение - O(n). Через хеш-таблицу и скользящее окно
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        last_seen = {}
+        left = result = 0
+        for right, symbol in enumerate(s):
+            if symbol in last_seen and last_seen[symbol] >= left:
+                left = last_seen[symbol] + 1
+            last_seen[symbol] = right
+            result = max(result, right - left + 1)
+        return result
